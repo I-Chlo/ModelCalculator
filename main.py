@@ -64,8 +64,8 @@ class Window(ttk.Frame):
             return False
 
     def invalidATRQ(self):
-
-        tk.messagebox.showerror(self, "Please enter a number between 1 and 5.")
+        print("")
+        #tk.messagebox.showerror(self, "Please enter a number between 1 and 5.")
 
 
     def validateKE(self,value):
@@ -80,8 +80,8 @@ class Window(ttk.Frame):
             return False
 
     def invalidKE(self):
-
-        tk.messagebox.showerror(self, "Please enter a number greater than 1")
+        print("")
+        #tk.messagebox.showerror(self, "Please enter a number greater than 1")
 
 
     def validateTIME(self,value):
@@ -96,8 +96,8 @@ class Window(ttk.Frame):
             return False
 
     def invalidTIME(self):
-
-        tk.messagebox.showerror(self, "Please enter a number greater than 3")
+        print("")
+        #tk.messagebox.showerror(self, "Please enter a number greater than 3")
 
     def validateCFL(self,value):
         print("no")
@@ -117,8 +117,8 @@ class Window(ttk.Frame):
             return False
 
     def invalidCFL(self):
-
-        tk.messagebox.showerror(self, "Please select either: None, Low, Medium or High")
+        print("")
+        #tk.messagebox.showerror(self, "Please select either: None, Low, Medium or High")
 
     def normaliseKE(self,v):
             try:
@@ -169,12 +169,13 @@ class Window(ttk.Frame):
                 # Its valid
                 if self.validateTIME(self.TIMEEntry.get()):
                     #Its valid
+
                     if self.CFLDrop.get().upper() in ["NONE","LOW","MEDIUM","HIGH"]:
                         # Now that I know they are valid they can be cast to int
-                        ATRQ = int(self.normaliseATRQ(self.ATEntry.get()))
-                        KE = int(self.normaliseKE(self.KEEntry.get()))
-                        TIME = int(self.normaliseTIME(self.TIMEEntry.get()))
-                        CFL = int(self.validateCFL(self.CFLDrop.get()))
+                        ATRQ = self.normaliseATRQ(int(self.ATEntry.get()))
+                        KE = self.normaliseKE(int(self.KEEntry.get()))
+                        TIME = self.normaliseTIME(int(self.TIMEEntry.get()))
+                        CFL = self.validateCFL(self.CFLDrop.get())
                         #Its valid
                         # Do Maths
                         # Define Storage Variables For Lookup Table Results
@@ -190,27 +191,37 @@ class Window(ttk.Frame):
 
                         if out < 0:
                             print("Recommended Model: CASH ")
+                            tk.messagebox.showinfo(self,"Recommended Model: CASH")
                         elif  0<=out<=2:
                             print("Recommended Model: Model 1")
+                            tk.messagebox.showinfo(self,"Recommended Model: Model 1")
                         elif  3<=out<=4:
                             print("Recommended Model: Model 2")
+                            tk.messagebox.showinfo(self,"Recommended Model: Model 2")
                         elif  5<=out<=6:
                             print("Recommended Model: Model 3")
+                            tk.messagebox.showinfo(self,"Recommended Model: Model 3")
                         elif  7<=out<=8:
                             print("Recommended Model: Model 4")
+                            tk.messagebox.showinfo(self,"Recommended Model: Model 4")
                         elif  9<=out<=11:
                             print("Recommended Model: Model 5")
-
-
-
-
+                            tk.messagebox.showinfo(self,"Recommended Model: Model 5")
+                    else:
+                        tk.messagebox.showerror(self, "CFL Error: Please select either: None, Low, Medium or High")
+                else:
+                    tk.messagebox.showerror(self, "TIME Error: Please enter a number greater than 3")
+            else:
+                tk.messagebox.showerror(self, "K&E Error: Please enter a number greater than 1")
+        else:
+            tk.messagebox.showerror(self, "ATRQ Error: Please enter a number between 1 and 5.")
 
 class App(tk.Tk):
     def __init__(self):
         super().__init__()
-        sv_ttk.set_theme("light")
+        sv_ttk.set_theme("dark")
         self.title("Model Calculator")
-        self.geometry("210x200")
+        self.geometry("200x180")
         self.resizable(False, False)
 
 
