@@ -39,6 +39,7 @@ class Window(ttk.Frame):
 
         self.TIMELabel = ttk.Label(self,font = "Roboto 12 bold", text="TIME").grid(self.lset,row=3,column=0,padx=5)
         self.TIMEEntry = ttk.Entry(self,validate="focusout", validatecommand=TIMEval, invalidcommand=TIMEinval)
+        self.TIMEEntry = ttk.Combobox(self, values=["3-7", "8-15", "15+"], )
         self.TIMEEntry.grid(self.eset,row=3, column=1)
 
 
