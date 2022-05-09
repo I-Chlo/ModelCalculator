@@ -253,7 +253,7 @@ class Window(ttk.Frame):
 
 
 
-                        path = str(desktop) + r"\"" +  ClientName + " | Model Calculator | " + str(date.today())
+                        path = str(desktop) + r'//' + ClientName + " - Model Calculator - " + str(date.today()) + ".txt"
                         with open(path, 'w') as t:
                             t.write("Client Name: " + ClientName + "\n")
                             t.write("RECOMMENDED MODEL: " + self.modelResult + "\n")
